@@ -13,7 +13,7 @@ from typing import Optional, Dict, List
 from dataclasses import dataclass
 from enum import Enum
 
-from stream_capture import ScreenCapture
+from modules.stream_capture import ScreenCapture
 
 
 class RecordingState(Enum):

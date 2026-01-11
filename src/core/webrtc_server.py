@@ -11,12 +11,12 @@ import numpy as np
 from aiortc import RTCPeerConnection, RTCSessionDescription, VideoStreamTrack, RTCConfiguration, RTCIceServer
 from aiortc.contrib.media import MediaBlackhole
 
-from stream_capture import ScreenCapture
-from input_control import execute_command
+from modules.stream_capture import ScreenCapture
+from core.input_control import execute_command
 
 # Try to import audio capture
 try:
-    from audio_capture import audio_manager, AudioCaptureTrack
+    from modules.audio_capture import audio_manager, AudioCaptureTrack
     AUDIO_AVAILABLE = True
 except ImportError:
     AUDIO_AVAILABLE = False

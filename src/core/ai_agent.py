@@ -1,4 +1,4 @@
-from input_control import CMD_KEY_TYPE, CMD_MOUSE_CLICK, CMD_SCROLL, CMD_KEY_PRESS, CMD_MOUSE_MOVE, CMD_MOUSE_DRAG
+from core.input_control import CMD_KEY_TYPE, CMD_MOUSE_CLICK, CMD_SCROLL, CMD_KEY_PRESS, CMD_MOUSE_MOVE, CMD_MOUSE_DRAG
 import subprocess
 import re
 

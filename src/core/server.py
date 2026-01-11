@@ -9,36 +9,36 @@ import asyncio
 import io
 import os
 
-from stream_capture import ScreenCapture
-from input_control import execute_command
-from ai_agent import AIAgent
-from webrtc_server import webrtc_manager
+from modules.stream_capture import ScreenCapture
+from core.input_control import execute_command
+from core.ai_agent import AIAgent
+from core.webrtc_server import webrtc_manager
 
 # Import new enhancement modules
-from file_transfer import file_manager
-from clipboard_sync import clipboard_manager
-from session_manager import session_manager
-from recorder import screen_recorder
-from wol import wol_manager
-from hw_encoder import hw_encoder_manager
-from auth import get_auth_status, set_password, verify_password, create_token, verify_token
-import power_control
-import system_stats
-from macro_recorder import macro_recorder
-import window_manager
-import tts
+from modules.file_transfer import file_manager
+from modules.clipboard_sync import clipboard_manager
+from modules.session_manager import session_manager
+from modules.recorder import screen_recorder
+from modules.wol import wol_manager
+from modules.hw_encoder import hw_encoder_manager
+from security.auth import get_auth_status, set_password, verify_password, create_token, verify_token
+import utils.power_control as power_control
+import utils.system_stats as system_stats
+from utils.macro_recorder import macro_recorder
+import utils.window_manager as window_manager
+import utils.tts as tts
 
 # v4.0 optimization modules
-from codec_manager import codec_manager, get_codec_status
-from network_optimizer import network_optimizer, optimize_network, get_network_status
-from security import security_manager, get_security_status, setup_2fa, verify_2fa
+from utils.codec_manager import codec_manager, get_codec_status
+from utils.network_optimizer import network_optimizer, optimize_network, get_network_status
+from security.security import security_manager, get_security_status, setup_2fa, verify_2fa
 
 # v4.1 advanced modules
-from audit_log import audit_log, log_event, get_audit_entries, get_audit_stats
-from whiteboard import whiteboard
-from collaboration import collab_session, join_session, leave_session, get_session_users
-import remote_print
-import voip
+from security.audit_log import audit_log, log_event, get_audit_entries, get_audit_stats
+from collaboration.whiteboard import whiteboard
+from collaboration.collaboration import collab_session, join_session, leave_session, get_session_users
+import utils.remote_print as remote_print
+import collaboration.voip as voip
 
 app = FastAPI(title="SpaceLink PC Agent", version="4.1")
 
@@ -141,7 +141,7 @@ async def update_video_settings(settings: VideoSettings):
 @app.get("/settings/audio")
 async def get_audio_settings():
     """Get audio settings."""
-    from audio_capture import audio_manager
+    from modules.audio_capture import audio_manager
     return {
         "muted": audio_manager.muted,
         "volume": audio_manager.volume,
@@ -151,7 +151,7 @@ async def get_audio_settings():
 @app.post("/settings/audio")
 async def update_audio_settings(request: Request):
     """Update audio settings."""
-    from audio_capture import audio_manager
+    from modules.audio_capture import audio_manager
     data = await request.json()
     
     if "muted" in data:
