@@ -19,50 +19,60 @@
 
 ## ✨ Features
 
-SpaceLink is a feature-rich remote desktop solution inspired by industry leaders like **Parsec**, **AnyDesk**, and **TeamViewer**.
+SpaceLink is a feature-rich remote desktop solution inspired by **Parsec**, **AnyDesk**, and **TeamViewer**.
 
-### 🎮 Core Features
-| Feature | Description |
-|---------|-------------|
-| 📺 **WebRTC Streaming** | Ultra-low latency video streaming |
-| 🎮 **Gamepad Support** | Full controller support with analog sticks |
-| 👆 **Touch Gestures** | Pinch-to-zoom, swipe, double-tap |
-| 🔊 **Audio Streaming** | Real-time audio capture |
-| 📁 **File Transfer** | Drag & drop file sharing |
-| 📋 **Clipboard Sync** | Cross-device clipboard |
+| Category | Features |
+|----------|----------|
+| 🎮 **Streaming** | WebRTC video, audio, gamepad, touch gestures |
+| ⚡ **Performance** | Adaptive bitrate (360p-4K), H.265/AV1, hardware encoding |
+| 🔒 **Security** | AES-256 encryption, 2FA, audit logging |
+| 🤝 **Collaboration** | Multi-user, whiteboard, chat, VoIP |
+| 🛠️ **System** | Power control, window manager, remote printing |
 
-### ⚡ Performance
-| Feature | Description |
-|---------|-------------|
-| 🎥 **Adaptive Bitrate** | 360p to 4K@60Hz |
-| 🔧 **Hardware Encoding** | NVENC, AMF, QuickSync |
-| 📊 **Codec Selection** | AV1, H.265, VP9, H.264 |
-| 📈 **Jitter Buffer** | Adaptive network optimization |
+---
 
-### 🔒 Security
-| Feature | Description |
-|---------|-------------|
-| 🔐 **AES-256 Encryption** | Military-grade security |
-| 📱 **2FA Authentication** | TOTP Google Authenticator |
-| 📝 **Audit Logging** | Complete session history |
-| 🔑 **Token Sessions** | Secure session management |
+## 📁 Project Structure
 
-### 🤝 Collaboration
-| Feature | Description |
-|---------|-------------|
-| 👥 **Multi-User Sessions** | Up to 10 concurrent users |
-| 🎨 **Whiteboard** | Collaborative drawing |
-| 💬 **Chat** | Real-time messaging |
-| 🎤 **VoIP** | Voice communication |
-
-### 🛠️ Advanced
-| Feature | Description |
-|---------|-------------|
-| ⚡ **Power Control** | Remote shutdown/restart |
-| 🖨️ **Remote Printing** | Print to remote printers |
-| 🪟 **Window Manager** | Control remote windows |
-| 🎬 **Macro Recording** | Record & playback actions |
-| 📊 **System Stats** | CPU/RAM/Disk monitoring |
+```
+SpaceLink/
+├── run.py                 # 🚀 Entry point
+├── requirements.txt       # Dependencies
+│
+├── src/
+│   ├── core/              # Core server components
+│   │   ├── server.py      # FastAPI main server
+│   │   ├── webrtc_server.py
+│   │   ├── input_control.py
+│   │   └── ai_agent.py
+│   │
+│   ├── modules/           # Feature modules
+│   │   ├── file_transfer.py
+│   │   ├── clipboard_sync.py
+│   │   ├── recorder.py
+│   │   └── ...
+│   │
+│   ├── security/          # Security & auth
+│   │   ├── auth.py
+│   │   ├── security.py    # AES-256 + 2FA
+│   │   └── audit_log.py
+│   │
+│   ├── collaboration/     # Multi-user features
+│   │   ├── collaboration.py
+│   │   ├── whiteboard.py
+│   │   └── voip.py
+│   │
+│   └── utils/             # Utilities
+│       ├── power_control.py
+│       ├── system_stats.py
+│       └── ...
+│
+├── clients/               # Client applications
+│   ├── webrtc_client.html # Web client
+│   └── SpaceLinkClient.swift
+│
+└── docs/                  # Documentation
+    └── architecture.png
+```
 
 ---
 
@@ -70,126 +80,51 @@ SpaceLink is a feature-rich remote desktop solution inspired by industry leaders
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/SpaceLink.git
+git clone https://github.com/cheehow95/SpaceLink.git
 cd SpaceLink
 
 # Install dependencies
 pip install -r requirements.txt
 
 # Start server
-python -m uvicorn server:app --host 0.0.0.0 --port 8000
+python run.py
 ```
 
 Open browser: `http://localhost:8000/webrtc-test`
 
 ---
 
-## 📦 Architecture
-
-```
-SpaceLink/
-├── server.py              # FastAPI main server
-├── webrtc_server.py       # WebRTC handling
-├── webrtc_client.html     # Web client (2000+ lines)
-├── SpaceLinkClient.swift  # iOS client
-│
-├── 🔧 Core Modules
-│   ├── input_control.py   # Mouse/keyboard control
-│   ├── ai_agent.py        # AI command processing
-│   └── screen_capture.py  # Screen capture
-│
-├── 📁 File & Clipboard
-│   ├── file_transfer.py   # File management
-│   └── clipboard_sync.py  # Clipboard sync
-│
-├── ⚡ Performance
-│   ├── codec_manager.py   # Codec selection
-│   ├── network_optimizer.py # Network optimization
-│   └── hw_encoder.py      # Hardware encoding
-│
-├── 🔒 Security
-│   ├── auth.py            # Authentication
-│   ├── security.py        # AES & 2FA
-│   └── audit_log.py       # Audit logging
-│
-├── 🤝 Collaboration
-│   ├── collaboration.py   # Multi-user
-│   ├── whiteboard.py      # Drawing
-│   └── voip.py            # Voice chat
-│
-└── 🛠️ Utilities
-    ├── power_control.py   # Power management
-    ├── system_stats.py    # System monitoring
-    ├── window_manager.py  # Window control
-    ├── tts.py             # Text-to-speech
-    ├── remote_print.py    # Printing
-    └── macro_recorder.py  # Macros
-```
-
----
-
 ## 📖 Documentation
 
-- [📥 Installation Guide](INSTALLATION.md)
-- [✨ Features Documentation](FEATURES.md)
-- [🔌 API Reference](API.md)
+| Document | Description |
+|----------|-------------|
+| [INSTALLATION.md](INSTALLATION.md) | Setup guide for all platforms |
+| [FEATURES.md](FEATURES.md) | Detailed feature documentation |
 
 ---
 
-## 🔧 Requirements
-
-- Python 3.8+
-- FFmpeg (for hardware encoding)
-- Modern web browser (Chrome/Firefox/Edge)
-
----
-
-## 📊 API Endpoints
-
-SpaceLink provides **120+ REST API endpoints**:
+## 📊 API (120+ Endpoints)
 
 | Category | Endpoints |
 |----------|-----------|
 | WebRTC | `/offer`, `/answer`, `/ice` |
 | Files | `/files/*` |
-| Clipboard | `/clipboard/*` |
 | Power | `/power/*` |
 | Stats | `/stats/*` |
-| Macros | `/macro/*` |
-| Windows | `/windows/*` |
-| TTS | `/tts/*` |
 | Optimization | `/optimize/*` |
-| Audit | `/audit/*` |
-| Whiteboard | `/whiteboard/*` |
-| Collaboration | `/collab/*` |
-| Print | `/print/*` |
+| Collaboration | `/collab/*`, `/whiteboard/*` |
 | VoIP | `/voip/*` |
 
----
-
-## 🖼️ Screenshots
-
-<p align="center">
-  <em>Web Client Interface</em>
-</p>
+Full API docs at: `http://localhost:8000/docs`
 
 ---
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) file.
-
----
-
-## 🙏 Acknowledgments
-
-Inspired by:
-- [Parsec](https://parsec.app) - Low latency gaming
-- [AnyDesk](https://anydesk.com) - Fast remote desktop
-- [TeamViewer](https://teamviewer.com) - Enterprise collaboration
+MIT License - see [LICENSE](LICENSE)
 
 ---
 
 <p align="center">
-  Made with ❤️ by the SpaceLink Team
+  Made with ❤️ | Inspired by Parsec, AnyDesk, TeamViewer
 </p>
