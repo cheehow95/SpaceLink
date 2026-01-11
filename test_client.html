@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SpaceLink Test Client</title>
+    <style>
+        body {
+            margin: 0;
+            background: #222;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #screen-container {
+            position: relative;
+            border: 2px solid #555;
+            margin-top: 20px;
+        }
+
+        img {
+            display: block;
+            max-width: 90vw;
+        }
+
+        #status {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>SpaceLink Monitor</h1>
+    <div id="status">Connecting...</div>
+
+    <div id="screen-container">
+        <!-- MJPEG Stream -->
+        <img id="stream-view" src="http://localhost:8000/stream" alt="Live Stream" />
+    </div>
+
+    <script>
+        const ws = new WebSocket("ws://localhost:8000/ws");
+        const statusDiv = document.getElementById("status");
+        const streamView = document.getElementById("stream-view");
+
+        ws.onopen = () => {
+            statusDiv.textContent = "Connected";
+            statusDiv.style.color = "lightgreen";
+        };
+
+        ws.onclose = () => {
+            statusDiv.textContent = "Disconnected";
+            statusDiv.style.color = "red";
+        };
+
+        // Capture clicks on image to move mouse
+        streamView.addEventListener("click", (event) => {
+            const rect = streamView.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Calculate normalized coordinates
+            const nx = x / rect.width;
+            const ny = y / rect.height;
+
+            const cmd = {
+                type: "mouse_move",
+                data: {
+                    nx: nx,
+                    ny: ny
+                }
+            };
+            ws.send(JSON.stringify(cmd));
+
+            // Also send click
+            setTimeout(() => {
+                ws.send(JSON.stringify({
+                    type: "mouse_click",
+                    data: { button: "left" }
+                }));
+            }, 100);
+        });
+
+        // Basic keyboard test
+        document.addEventListener("keydown", (event) => {
+            // Avoid sending F5/F12 etc
+            if (event.key.length === 1) {
+                // ws.send(JSON.stringify({
+                //     type: "key_type",
+                //     data: { text: event.key }
+                // }));
+            }
+        });
+
+        function sendAICommand() {
+            const input = document.getElementById("ai-input");
+            const prompt = input.value;
+            ws.send(JSON.stringify({
+                prompt: prompt
+            }));
+            input.value = "";
+        }
+    </script>
+
+    <div style="margin-top: 10px;">
+        <input type="text" id="ai-input" placeholder="Type command (e.g. 'type hello')"
+            style="padding: 5px; width: 300px;">
+        <button onclick="sendAICommand()" style="padding: 5px;">Send to AI</button>
+    </div>
+</body>
+
+</html>
