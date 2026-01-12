@@ -548,7 +548,11 @@ async def get_connection_qr(request: Request):
 @app.get("/webrtc-test")
 async def webrtc_test_page():
     """Serve the WebRTC test client."""
-    return HTMLResponse(open("webrtc_client.html", "r", encoding="utf-8").read())
+    # Get path relative to project root (run.py location)
+    import pathlib
+    project_root = pathlib.Path(__file__).parent.parent.parent
+    client_path = project_root / "clients" / "webrtc_client.html"
+    return HTMLResponse(open(client_path, "r", encoding="utf-8").read())
 
 # ============ Power Control ============
 

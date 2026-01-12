@@ -1,4 +1,4 @@
-from core.input_control import CMD_KEY_TYPE, CMD_MOUSE_CLICK, CMD_SCROLL, CMD_KEY_PRESS, CMD_MOUSE_MOVE, CMD_MOUSE_DRAG
+from .input_control import CMD_KEY_TYPE, CMD_MOUSE_CLICK, CMD_SCROLL, CMD_KEY_PRESS, CMD_MOUSE_MOVE, CMD_MOUSE_DRAG
 import subprocess
 import re
 
@@ -207,3 +207,7 @@ class AIAgent:
         
         # Fallback / Unknown
         return {"status": "error", "message": f"I didn't understand: '{prompt}'"}
+
+
+# Singleton instance for easy import
+ai_agent = AIAgent()
